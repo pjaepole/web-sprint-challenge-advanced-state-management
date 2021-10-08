@@ -1,4 +1,4 @@
-
+import {SMURFS_FETCH_START,SMURFS_FETCH_SUCCESS,SMURFS_FETCH_ERROR} from '../actions'
 export const initialState = {   
     smurfs:[
         {
@@ -15,13 +15,27 @@ export const initialState = {
 
 const reducer = (state=initialState, action)=>{
     switch(action.type){
-        // case (SMURFS_START_FETCH):
-        //     return({
-        //         ...state,
-        //         smurfs:[],
-        //         loading:true,
-        //         error:""
-        //     })
+        case (SMURFS_FETCH_START):
+            return({
+                ...state,
+                smurfs:[],
+                loading:true,
+                error:""
+            })
+        case (SMURFS_FETCH_SUCCESS):
+            return({
+                ...state,
+                smurfs:action.payload,
+                loading:false,
+                error:""
+            })
+        case (SMURFS_FETCH_ERROR):
+            return({
+                ...state,
+                smurfs:[],
+                loading:false,
+                error:action.payload
+            })
         default:
             return state
     }
