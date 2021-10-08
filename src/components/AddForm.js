@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { connect } from 'react-redux';
 import { smurfsAddSmurf,smurfsFetchError,smurfsAddError } from '../actions';
 const AddForm = (props) => {
@@ -10,16 +10,18 @@ const AddForm = (props) => {
     });
 
     //remove when error state is added
-    // const errorMessage = props.error;
-
+   
     const handleChange = e => {
         setState({
             ...state,
             [e.target.name]:e.target.value
         });
         // console.log(props)
+        if (state.name === "" || state.position === "" || state.nickname === "") {
+            //add in error action
+            props.smurfsAddError(`Required Field is Empty`)
+    }else props.smurfsAddError("")
     }
-
     const handleSubmit = e => {
         e.preventDefault();
         if (state.name === "" || state.position === "" || state.nickname === "") {
