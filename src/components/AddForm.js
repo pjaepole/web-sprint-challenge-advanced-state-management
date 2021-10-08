@@ -10,10 +10,11 @@ const AddForm = (props) => {
     });
 
    
-   useEffect(()=>{
-       props.smurfsAddError('Fill out the required field')
-   },[props.smurfs])
+//    useEffect(()=>{
+//        props.smurfsAddError('Fill out the required field')
+//    },[props.smurfs])
 
+   
 
     const handleChange = e => {
         setState({
@@ -23,20 +24,19 @@ const AddForm = (props) => {
         // console.log(props)
         if (state.name === "" || state.position === "" || state.nickname === "") {
             //add in error action
-            props.smurfsAddError(`All Required Field is Empty`)
-    }else props.smurfsAddError("")
+            props.smurfsAddError("Required Field is Empty")
+    }
+    // else if (state.name !== "" || state.position !== "" || state.nickname !== ""){           
+    //     props.smurfsAddError()
+    // }
     }
     const handleSubmit = e => {
         e.preventDefault();
         if (state.name === "" || state.position === "" || state.nickname === "") {
             //add in error action
-            props.smurfsAddError(`Required Field is Empty`)
-        }else   props.smurfsAddSmurf({
-            name:state.name,
-            position:state.position,
-            nickname:state.nickname,
-            description:state.description
-        })
+            props.smurfsAddError("Name,Position,Nickname Field is Required")
+        }else{props.smurfsAddSmurf(state
+        )}
     }
 
 
