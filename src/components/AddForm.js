@@ -9,8 +9,12 @@ const AddForm = (props) => {
         description:""
     });
 
-    //remove when error state is added
    
+   useEffect(()=>{
+       props.smurfsAddError('Fill out the required field')
+   },[props.smurfs])
+
+
     const handleChange = e => {
         setState({
             ...state,
@@ -19,7 +23,7 @@ const AddForm = (props) => {
         // console.log(props)
         if (state.name === "" || state.position === "" || state.nickname === "") {
             //add in error action
-            props.smurfsAddError(`Required Field is Empty`)
+            props.smurfsAddError(`All Required Field is Empty`)
     }else props.smurfsAddError("")
     }
     const handleSubmit = e => {
@@ -68,6 +72,7 @@ const AddForm = (props) => {
 }
 const mapStateToProps=state=>{
     return{
+        smurfs:state.smurfs,
         error:state.error
     }
 }
